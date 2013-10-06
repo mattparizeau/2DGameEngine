@@ -8,6 +8,8 @@ import java.awt.image.BufferedImage;
 
 import javax.swing.JFrame;
 
+import com.base.engine.input.Input;
+
 public class Engine extends Canvas implements Runnable
 {
     private static final long serialVersionUID = 1L;
@@ -33,6 +35,7 @@ public class Engine extends Canvas implements Runnable
         this.image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
         this.screen = new Screen(width, height);
         this.frame = new JFrame();
+        this.addKeyListener(Input.getInput());
         this.initFrame();
     }
 
@@ -58,6 +61,8 @@ public class Engine extends Canvas implements Runnable
         mainThread = new Thread(this);
         mainThread.setPriority(Thread.MAX_PRIORITY);
         mainThread.start();
+        
+        this.requestFocus();
     }
 
     @Override
@@ -119,6 +124,16 @@ public class Engine extends Canvas implements Runnable
     public String getTitle()
     {
         return this.title;
+    }
+    
+    public Screen getScreen()
+    {
+        return this.screen;
+    }
+    
+    public IGame getGame()
+    {
+        return this.game;
     }
 
     public static Engine getInstance()
