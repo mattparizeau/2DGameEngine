@@ -41,6 +41,7 @@ public class Screen
     
     public void setNextPixel(int x, int y, int color)
     {
+        if (x < 0 || y < 0 || x >= width || y >= height) return;
         this.nextPixels[x + y * width] = color;
     }
     

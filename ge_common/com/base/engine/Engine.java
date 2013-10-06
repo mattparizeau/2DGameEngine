@@ -5,6 +5,7 @@ import java.awt.Dimension;
 import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
+import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
@@ -26,6 +27,7 @@ public class Engine extends Canvas implements Runnable
     private Screen screen;
     private BufferedImage image;
     private JFrame frame;
+    private static ArrayList<GameObject> objects = new ArrayList<GameObject>();
 
     private Engine(IGame game)
     {
@@ -69,16 +71,45 @@ public class Engine extends Canvas implements Runnable
     public void run()
     {
         isRunning = true;
+        
+        long lastTime = Time.getTime();
+        long timeCounter = 0;
+        long frameCounter = 0;
+        int frames = 0;
+        int updates = 0;
         while (isRunning)
         {
-            update();
+            long currentTime = Time.getTime();
+            long passedTime = currentTime - lastTime;
+            lastTime = currentTime;
+            
+            timeCounter += passedTime;
+            frameCounter += passedTime;
+            
+            while (timeCounter >= Time.SECOND / 60)
+            {
+                timeCounter -= Time.SECOND / 60;
+                update();
+                updates++;
+            }
+            if (frameCounter >= Time.SECOND)
+            {
+                frame.setTitle(title + " | UPS: " + updates + ", FPS: " + frames);
+                frameCounter = 0;
+                frames = 0;
+                updates = 0;
+            }
+            
             render();
+            frames++;
         }
         stop();
     }
 
     public void update()
     {
+        for (int i = 0; i < objects.size(); i++)
+            objects.get(i).updateControllers();
         game.update();
     }
 
@@ -134,6 +165,11 @@ public class Engine extends Canvas implements Runnable
     public IGame getGame()
     {
         return this.game;
+    }
+    
+    public static ArrayList<GameObject> getObjects()
+    {
+        return Engine.objects;
     }
 
     public static Engine getInstance()

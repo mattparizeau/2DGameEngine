@@ -2,6 +2,7 @@ package com.base.engine.render;
 
 import com.base.engine.Engine;
 import com.base.engine.math.Vector2f;
+import com.base.engine.sprite.Sprite;
 
 public class RenderManager
 {
@@ -36,6 +37,21 @@ public class RenderManager
                 if (x == (int)offset.getX() || x == (int)offset.getX() + (int)size.getX() - 1 ||
                     y == (int)offset.getY() || y == (int)offset.getY() + (int)size.getY() - 1)
                     Engine.getInstance().getScreen().setNextPixel(x, y, color);
+            }
+        }
+    }
+    
+    public static void drawSprite(Sprite sprite, Vector2f position)
+    {
+        Vector2f offset = getOffset(position);
+        
+        for (int x = (int)offset.getX(); x < (int)offset.getX() + (int)sprite.getWidth(); x++)
+        {
+            for (int y = (int)offset.getY(); y < (int)offset.getY() + (int)sprite.getHeight(); y++)
+            {
+                int x_ = x - (int)offset.getX();
+                int y_ = y - (int)offset.getY();
+                Engine.getInstance().getScreen().setNextPixel(x, y, sprite.getPixel(x_, y_));
             }
         }
     }

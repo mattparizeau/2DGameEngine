@@ -43,6 +43,7 @@ public class Input implements KeyListener
     public static final int KEY_T = KeyEvent.VK_T;
     public static final int KEY_U = KeyEvent.VK_U;
     public static final int KEY_V = KeyEvent.VK_V;
+    public static final int KEY_W = KeyEvent.VK_W;
     public static final int KEY_X = KeyEvent.VK_X;
     public static final int KEY_Y = KeyEvent.VK_Y;
     public static final int KEY_Z = KeyEvent.VK_Z;
