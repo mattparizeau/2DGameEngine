@@ -1,13 +1,13 @@
 package com.base.engine.controller;
 
-import com.base.engine.GameObject;
+import com.base.engine.entity.Entity;
 import com.base.engine.math.Vector2f;
 
 public abstract class Controller
 {
-    protected GameObject object;
+    protected Entity object;
     
-    public Controller(GameObject object)
+    public Controller(Entity object)
     {
         this.object = object;
     }

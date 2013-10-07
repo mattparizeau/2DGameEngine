@@ -9,6 +9,7 @@ import java.util.ArrayList;
 
 import javax.swing.JFrame;
 
+import com.base.engine.entity.Entity;
 import com.base.engine.input.Input;
 
 public class Engine extends Canvas implements Runnable
@@ -27,7 +28,7 @@ public class Engine extends Canvas implements Runnable
     private Screen screen;
     private BufferedImage image;
     private JFrame frame;
-    private static ArrayList<GameObject> objects = new ArrayList<GameObject>();
+    private static ArrayList<Entity> objects = new ArrayList<Entity>();
 
     private Engine(IGame game)
     {
@@ -167,7 +168,7 @@ public class Engine extends Canvas implements Runnable
         return this.game;
     }
     
-    public static ArrayList<GameObject> getObjects()
+    public static ArrayList<Entity> getObjects()
     {
         return Engine.objects;
     }

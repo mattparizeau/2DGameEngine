@@ -1,13 +1,13 @@
 package com.base.engine.controller;
 
-import com.base.engine.GameObject;
+import com.base.engine.entity.Entity;
 import com.base.engine.input.Input;
 import com.base.engine.math.Vector2f;
 
 public class ArrowController extends Controller
 {
 
-    public ArrowController(GameObject object)
+    public ArrowController(Entity object)
     {
         super(object);
     }

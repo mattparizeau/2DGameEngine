@@ -1,11 +1,11 @@
 package com.base.game;
 
-import com.base.engine.GameObject;
+import com.base.engine.entity.Entity;
 import com.base.engine.render.RenderManager;
 import com.base.engine.sprite.Sprite;
 import com.base.engine.sprite.SpriteSheet;
 
-public class Player extends GameObject
+public class Player extends Entity
 {
     
     private Sprite sprite;

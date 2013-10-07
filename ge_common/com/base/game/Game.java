@@ -2,7 +2,10 @@ package com.base.game;
 
 import com.base.engine.Engine;
 import com.base.engine.IGame;
+import com.base.engine.controller.ArrowController;
 import com.base.engine.controller.WASDController;
+import com.base.engine.math.Vector2f;
+import com.base.engine.render.RenderManager;
 
 public class Game implements IGame
 {
@@ -12,6 +15,7 @@ public class Game implements IGame
     {
         player = new Player();
         player.attachController(new WASDController(player));
+        RenderManager.getCamera().attachController(new ArrowController(RenderManager.getCamera()));
     }
 
     @Override
@@ -23,6 +27,7 @@ public class Game implements IGame
     @Override
     public void render()
     {
+        RenderManager.drawRect(new Vector2f(0,0), new Vector2f(Engine.width, Engine.height), 0x00FF00);
         player.render();
     }
     

@@ -1,16 +1,27 @@
 package com.base.engine.render;
 
 import com.base.engine.Engine;
+import com.base.engine.entity.Camera;
 import com.base.engine.math.Vector2f;
 import com.base.engine.sprite.Sprite;
 
 public class RenderManager
 {
+    private static Camera camera = new Camera();
+    
+    public static void setCamera(Camera camera)
+    {
+        RenderManager.camera = camera;
+    }
+    
+    public static Camera getCamera()
+    {
+        return RenderManager.camera;
+    }
     
     private static Vector2f getOffset(Vector2f position)
     {
-        // TODO: get offset based on camera position.
-        return position;
+        return position.sub(RenderManager.camera.getTransform().getPosition());
     }
     
     public static void fillRect(Vector2f position, Vector2f size, int color)

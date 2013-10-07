@@ -1,16 +1,18 @@
-package com.base.engine;
+package com.base.engine.entity;
 
 import java.util.ArrayList;
 
+import com.base.engine.Engine;
+import com.base.engine.Transform;
 import com.base.engine.controller.Controller;
 
-public abstract class GameObject
+public abstract class Entity
 {
     protected Transform transform;
     protected String name;
     protected ArrayList<Controller> controllers;
 
-    public GameObject(String name)
+    public Entity(String name)
     {
         this.name = name;
         this.transform = new Transform();
@@ -38,7 +40,7 @@ public abstract class GameObject
         Engine.getObjects().remove(this);
     }
     
-    protected void updateControllers()
+    public final void updateControllers()
     {
         for (int i = 0; i < controllers.size(); i++)
         {
