@@ -4,14 +4,13 @@ import com.base.engine.entity.Entity;
 import com.base.engine.render.RenderManager;
 import com.base.engine.sprite.Sprite;
 
-public class Player extends Entity
+public class Box extends Entity
 {
-    
     private Sprite sprite;
-    public Player()
+    public Box()
     {
-        super("Player");
-        this.sprite = Game.sprites.getSprite(16, 0, 0);
+        super("Arena");
+        sprite = Game.sprites.getSprite(16, 1, 0);
     }
 
     @Override
@@ -23,7 +22,7 @@ public class Player extends Entity
     @Override
     public void render()
     {
-        RenderManager.drawSprite(sprite, getTransform().getPosition());
+        RenderManager.drawSprite(sprite, this.getTransform().getPosition());
     }
 
     @Override

@@ -5,19 +5,23 @@ import java.util.ArrayList;
 import com.base.engine.Engine;
 import com.base.engine.Transform;
 import com.base.engine.controller.Controller;
+import com.base.engine.entity.collision.ICollider;
+import com.base.engine.util.Physics;
 
 public abstract class Entity
 {
     protected Transform transform;
     protected String name;
     protected ArrayList<Controller> controllers;
+    protected ArrayList<ICollider> colliders;
 
     public Entity(String name)
     {
         this.name = name;
         this.transform = new Transform();
         this.controllers = new ArrayList<Controller>();
-        Engine.getObjects().add(this);
+        this.colliders = new ArrayList<ICollider>();
+        Engine.getEntities().add(this);
     }
     
     public void attachController(Controller controller)
@@ -30,21 +34,44 @@ public abstract class Entity
         this.controllers.remove(controller);
     }
     
-    public void detachAll()
+    public void detachAllControllers()
     {
         this.controllers.clear();
     }
     
-    public void dispose()
+    public void attachCollider(ICollider collider)
     {
-        Engine.getObjects().remove(this);
+        this.colliders.add(collider);
     }
     
-    public final void updateControllers()
+    public void detachCollider(ICollider collider)
+    {
+        this.colliders.remove(collider);
+    }
+    
+    public void detachAllColliders()
+    {
+        this.colliders.clear();
+    }
+    
+    public void dispose()
+    {
+        Engine.getEntities().remove(this);
+    }
+    
+    public final void updateEntity()
     {
         for (int i = 0; i < controllers.size(); i++)
         {
             controllers.get(i).update();
+        }
+        Entity e = Physics.checkCollision(this);
+        if (e != null)
+        {
+            for (int i = 0; i < colliders.size(); i++)
+            {
+                colliders.get(i).onCollision(e);
+            }
         }
     }
     
@@ -60,5 +87,8 @@ public abstract class Entity
     {
         return this.transform;
     }
+
+    public abstract float getSize();
+    public abstract boolean canCollide();
 
 }

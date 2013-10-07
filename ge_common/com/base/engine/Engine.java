@@ -28,7 +28,7 @@ public class Engine extends Canvas implements Runnable
     private Screen screen;
     private BufferedImage image;
     private JFrame frame;
-    private static ArrayList<Entity> objects = new ArrayList<Entity>();
+    private static ArrayList<Entity> entities = new ArrayList<Entity>();
 
     private Engine(IGame game)
     {
@@ -109,8 +109,8 @@ public class Engine extends Canvas implements Runnable
 
     public void update()
     {
-        for (int i = 0; i < objects.size(); i++)
-            objects.get(i).updateControllers();
+        for (int i = 0; i < entities.size(); i++)
+            entities.get(i).updateEntity();
         game.update();
     }
 
@@ -168,9 +168,9 @@ public class Engine extends Canvas implements Runnable
         return this.game;
     }
     
-    public static ArrayList<Entity> getObjects()
+    public static ArrayList<Entity> getEntities()
     {
-        return Engine.objects;
+        return Engine.entities;
     }
 
     public static Engine getInstance()
